@@ -1,0 +1,2457 @@
+
+
+
+<!DOCTYPE HTML>
+<html lang="ko">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-site-verification"
+              content="mzkAy71X1qQFWihQN535LoiToXg34MUg9nuor7Og9E8" />
+        <meta name="naver-site-verification"
+              content="a7b53e9ea172d3cefcc05eaba6ebf7180eca08fa" />
+        
+    <meta name="description"
+          content="## 📝 레지스터   ### 1. 레지스터 (Register) 개요  **레지스터**는 중앙 처리 장치(CPU) 내에서 데이터를 **일시적으로 저장**하는 데 사용되는 **순차 …">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="위키독스">
+    <meta property="og:title" content="02-4 레지스터">
+    <meta property="og:description"
+          content="## 📝 레지스터   ### 1. 레지스터 (Register) 개요  **레지스터**는 중앙 처리 장치(CPU) 내에서 데이터를 **일시적으로 저장**하는 데 사용되는 **순차 …">
+    <meta property="og:image"
+          content="https://static.wikidocs.net/images/book/no_image.png">
+    <meta property="og:url"
+          content="https://wikidocs.net/311884">
+
+        <link rel="apple-touch-icon"
+              sizes="180x180"
+              href="https://static.wikidocs.net/static/img/LaunchImage.png">
+        <link rel="manifest"
+              href="https://static.wikidocs.net/static/site.webmanifest?v=1017">
+        <link rel="shortcut icon"
+              type="image/x-icon"
+              href="https://static.wikidocs.net/static/img/favicon.ico">
+        
+    <link rel="canonical"
+          href="https://wikidocs.net/311884">
+
+        <link rel="preload"
+              as="style"
+              crossorigin
+              href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+        <link rel="stylesheet"
+              crossorigin
+              href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+        <title>
+            
+    02-4 레지스터 - 컴퓨터구조
+
+        </title>
+        <link rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+              crossorigin="anonymous">
+        <link type="text/css"
+              href="https://static.wikidocs.net/static/book/css/common.min.css?v=1017"
+              rel="stylesheet"
+              media="screen" />
+        
+            <link type="text/css"
+                  id="main-stylesheet"
+                  href="https://static.wikidocs.net/static/book/css/style_stack.min.css?v=1017"
+                  rel="stylesheet"
+                  media="screen" />
+        
+        
+    
+    
+    <style>
+        ins.adsbygoogle[data-ad-status="unfilled"] {
+            display: none !important;
+        }
+
+        .ad-wrapper:has(> ins.adsbygoogle[data-ad-status="unfilled"]),
+        .dynamic-ad:has(> ins.adsbygoogle[data-ad-status="unfilled"]) {
+            display: none !important;
+        }
+
+        .wikidocs-ad-top-block .first-ad,
+        .wikidocs-ad-top-block .second-ad,
+        .wikidocs-ad-top-block .ad-wrapper {
+            height: 280px;
+            min-height: 280px;
+            overflow: hidden;
+        }
+
+        .wikidocs-ad-top-block .first-ad:has(ins.adsbygoogle[data-ad-status="unfilled"]),
+        .wikidocs-ad-top-block .second-ad:has(ins.adsbygoogle[data-ad-status="unfilled"]),
+        .wikidocs-ad-top-block .ad-wrapper:has(ins.adsbygoogle[data-ad-status="unfilled"]) {
+            height: 0;
+            min-height: 0;
+        }
+    </style>
+    
+
+        
+    
+
+
+        
+            <!-- Global site tag (gtag.js) - Google Analytics -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-6N5MJRGLWG"></script>
+            <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-6N5MJRGLWG');
+        gtag('config', 'AW-1044074083');
+        gtag('event', 'conversion', {
+            'send_to': 'AW-1044074083/jW6kCMei2KYaEOOc7fED',
+            'value': 1.0,
+            'currency': 'KRW'
+        });
+            </script>
+        
+    </head>
+    <body data-is-mobile="false"
+          data-is-authenticated="false"
+          data-is-debug="false"
+           data-is-darkmode='false' >
+        
+    
+        <!-- PC -->
+
+    
+
+
+    
+
+        
+        
+        <div class="container" style="padding-bottom:50px">
+            
+    <div class="content row tex2jax_ignore" style="margin-top:0px;">
+        <div class="col-sm-3">
+
+<div class="row"
+     id="toc-data"
+     data-book-id="18622"
+     data-toc-folding="N">
+    <div class="col-sm-3 sidebar"
+         style="padding:0;
+                margin:0;
+                overflow-x: hidden">
+        
+        <div class="toc toc-checker">
+            <div class="row">
+                <div class="col-xs-12" style="padding:0;">
+                    <div class="row clearfix"
+                         style="margin:0;
+                                padding:0;
+                                border-bottom:solid 1px #ccc">
+                        <div class="pull-left" style="width:50%;">
+                            <input type="text"
+                                   style="margin-left:15px"
+                                   id="kw"
+                                   name="kw"
+                                   class="input-search"
+                                   placeholder="검색어를 입력하세요."
+                                   autocomplete="off">
+                            <ul id="search-results" class="dropdown-menu" aria-labelledby="kw">
+                            </ul>
+                        </div>
+                        <div class="pull-right">
+                            
+                                <button class="btn btn-xs btn-default find-btn" style="margin-top:12px;">
+                                    <i class="glyphicon glyphicon-search" title="찾기"></i>
+                                </button>
+                                <button class="btn btn-xs btn-default menu_link menu-toggle"
+                                        style="margin-top:12px">
+                                    <i class="glyphicon glyphicon-menu-hamburger" title="사이드바 토글"></i>
+                                </button>
+                                <a href="/"
+                                   class="btn btn-xs btn-default home-btn"
+                                   style="margin-right:20px;
+                                          margin-top:12px">
+                                    <i class="glyphicon glyphicon-home" title="위키독스"></i>
+                                </a>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="list-group list-group-toc" style="margin:0;">
+                <a class="list-group-item book-title "
+                   href="/book/18622"
+                   style="margin:0">
+                    <span style="white-space:nowrap;
+                                 overflow:hidden;
+                                 display:block"
+                          title="컴퓨터구조">
+                        
+                            <i class="glyphicon glyphicon-book"></i>
+                        
+                        <strong>컴퓨터구조</strong>
+                    </span>
+                    
+                </a>
+                <div class="scrollable-content">
+                    
+                        <a href="javascript:page(306977)"
+                           class="list-group-item toc-item "
+                           data-id="306977"
+                           data-parent-id=""
+                           data-depth="0">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="00 목차">
+                                <span style="padding-left:0px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    00 목차
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(311384)"
+                           class="list-group-item toc-item "
+                           data-id="311384"
+                           data-parent-id=""
+                           data-depth="0">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="01 디지털 논리회로">
+                                <span style="padding-left:0px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    01 디지털 논리회로
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(311385)"
+                           class="list-group-item toc-item "
+                           data-id="311385"
+                           data-parent-id="311384"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="01-1 디지털 컴퓨터">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    01-1 디지털 컴퓨터
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(311833)"
+                           class="list-group-item toc-item "
+                           data-id="311833"
+                           data-parent-id="311384"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="01-2 논리 게이트">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    01-2 논리 게이트
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(311847)"
+                           class="list-group-item toc-item "
+                           data-id="311847"
+                           data-parent-id="311384"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="01-3 부울 대수">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    01-3 부울 대수
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(311846)"
+                           class="list-group-item toc-item "
+                           data-id="311846"
+                           data-parent-id="311384"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="01-4 맵의 간소화">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    01-4 맵의 간소화
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(311844)"
+                           class="list-group-item toc-item "
+                           data-id="311844"
+                           data-parent-id="311384"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="01-5 조합 회로">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    01-5 조합 회로
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(311873)"
+                           class="list-group-item toc-item "
+                           data-id="311873"
+                           data-parent-id="311384"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="01-6 플립플롭">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    01-6 플립플롭
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(311872)"
+                           class="list-group-item toc-item "
+                           data-id="311872"
+                           data-parent-id="311384"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="01-7 순차 회로">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    01-7 순차 회로
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(311874)"
+                           class="list-group-item toc-item "
+                           data-id="311874"
+                           data-parent-id=""
+                           data-depth="0">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="02 디지털 부속품">
+                                <span style="padding-left:0px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    02 디지털 부속품
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(311881)"
+                           class="list-group-item toc-item "
+                           data-id="311881"
+                           data-parent-id="311874"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="02-1 집적 회로">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    02-1 집적 회로
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(311885)"
+                           class="list-group-item toc-item "
+                           data-id="311885"
+                           data-parent-id="311874"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="02-2 디코더">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    02-2 디코더
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(311882)"
+                           class="list-group-item toc-item "
+                           data-id="311882"
+                           data-parent-id="311874"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="02-3 멀티플렉서">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    02-3 멀티플렉서
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(311884)"
+                           class="list-group-item toc-item active"
+                           data-id="311884"
+                           data-parent-id="311874"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="02-4 레지스터">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    02-4 레지스터
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(311898)"
+                           class="list-group-item toc-item "
+                           data-id="311898"
+                           data-parent-id="311874"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="02-5 시프트 레지스터">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    02-5 시프트 레지스터
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(311900)"
+                           class="list-group-item toc-item "
+                           data-id="311900"
+                           data-parent-id="311874"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="02-6 이진 카운터">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    02-6 이진 카운터
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(311899)"
+                           class="list-group-item toc-item "
+                           data-id="311899"
+                           data-parent-id="311874"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="02-7 메모리 장치">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    02-7 메모리 장치
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(311877)"
+                           class="list-group-item toc-item "
+                           data-id="311877"
+                           data-parent-id=""
+                           data-depth="0">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="03 데이터의 표현">
+                                <span style="padding-left:0px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    03 데이터의 표현
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(311906)"
+                           class="list-group-item toc-item "
+                           data-id="311906"
+                           data-parent-id="311877"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="03-1 데이터의 종류">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    03-1 데이터의 종류
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(311903)"
+                           class="list-group-item toc-item "
+                           data-id="311903"
+                           data-parent-id="311877"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="03-2 보수">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    03-2 보수
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(311902)"
+                           class="list-group-item toc-item "
+                           data-id="311902"
+                           data-parent-id="311877"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="03-3 고정 소수점 표현">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    03-3 고정 소수점 표현
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(311904)"
+                           class="list-group-item toc-item "
+                           data-id="311904"
+                           data-parent-id="311877"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="03-4 부동 소수점 표현">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    03-4 부동 소수점 표현
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(311901)"
+                           class="list-group-item toc-item "
+                           data-id="311901"
+                           data-parent-id="311877"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="03-5 기타 이진 코드">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    03-5 기타 이진 코드
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(311905)"
+                           class="list-group-item toc-item "
+                           data-id="311905"
+                           data-parent-id="311877"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="03-6 에러 검출 코드">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    03-6 에러 검출 코드
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(311879)"
+                           class="list-group-item toc-item "
+                           data-id="311879"
+                           data-parent-id=""
+                           data-depth="0">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="04 레지스터 전송과 마이크로 연산">
+                                <span style="padding-left:0px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    04 레지스터 전송과 마이크로 연산
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(311987)"
+                           class="list-group-item toc-item "
+                           data-id="311987"
+                           data-parent-id="311879"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="04-1 레지스터 전송 언어">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    04-1 레지스터 전송 언어
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(311990)"
+                           class="list-group-item toc-item "
+                           data-id="311990"
+                           data-parent-id="311879"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="04-2 레지스터 전송">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    04-2 레지스터 전송
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(311989)"
+                           class="list-group-item toc-item "
+                           data-id="311989"
+                           data-parent-id="311879"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="04-3 버스와 메모리 전송">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    04-3 버스와 메모리 전송
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(311992)"
+                           class="list-group-item toc-item "
+                           data-id="311992"
+                           data-parent-id="311879"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="04-4 산술 마이크로 연산">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    04-4 산술 마이크로 연산
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(311988)"
+                           class="list-group-item toc-item "
+                           data-id="311988"
+                           data-parent-id="311879"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="04-5 논리 마이크로 연산">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    04-5 논리 마이크로 연산
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(311991)"
+                           class="list-group-item toc-item "
+                           data-id="311991"
+                           data-parent-id="311879"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="04-6 시프트 마이크로 연산">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    04-6 시프트 마이크로 연산
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(311993)"
+                           class="list-group-item toc-item "
+                           data-id="311993"
+                           data-parent-id="311879"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="04-7 산술 논리 시프트 장치">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    04-7 산술 논리 시프트 장치
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(311878)"
+                           class="list-group-item toc-item "
+                           data-id="311878"
+                           data-parent-id=""
+                           data-depth="0">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="05 기본 컴퓨터의 구조와 설계">
+                                <span style="padding-left:0px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    05 기본 컴퓨터의 구조와 설계
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312008)"
+                           class="list-group-item toc-item "
+                           data-id="312008"
+                           data-parent-id="311878"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="05-01 명령어 코드">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    05-01 명령어 코드
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312007)"
+                           class="list-group-item toc-item "
+                           data-id="312007"
+                           data-parent-id="311878"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="05-02 컴퓨터 레지스터">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    05-02 컴퓨터 레지스터
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312010)"
+                           class="list-group-item toc-item "
+                           data-id="312010"
+                           data-parent-id="311878"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="05-03 컴퓨터 명령어">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    05-03 컴퓨터 명령어
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312004)"
+                           class="list-group-item toc-item "
+                           data-id="312004"
+                           data-parent-id="311878"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="05-04 타이밍과 제어">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    05-04 타이밍과 제어
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312006)"
+                           class="list-group-item toc-item "
+                           data-id="312006"
+                           data-parent-id="311878"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="05-05 명령어 사이클">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    05-05 명령어 사이클
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312005)"
+                           class="list-group-item toc-item "
+                           data-id="312005"
+                           data-parent-id="311878"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="05-06 메모리 참조 명령어">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    05-06 메모리 참조 명령어
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312009)"
+                           class="list-group-item toc-item "
+                           data-id="312009"
+                           data-parent-id="311878"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="05-07 입출력과 인터럽트">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    05-07 입출력과 인터럽트
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312003)"
+                           class="list-group-item toc-item "
+                           data-id="312003"
+                           data-parent-id="311878"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="05-08 컴퓨터에 대한 완전한 기술">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    05-08 컴퓨터에 대한 완전한 기술
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312001)"
+                           class="list-group-item toc-item "
+                           data-id="312001"
+                           data-parent-id="311878"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="05-09 기본 컴퓨터의 설계">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    05-09 기본 컴퓨터의 설계
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312002)"
+                           class="list-group-item toc-item "
+                           data-id="312002"
+                           data-parent-id="311878"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="05-10 누산기 논리의 설계">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    05-10 누산기 논리의 설계
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(311880)"
+                           class="list-group-item toc-item "
+                           data-id="311880"
+                           data-parent-id=""
+                           data-depth="0">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="06 기본 컴퓨터 프로그래밍">
+                                <span style="padding-left:0px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    06 기본 컴퓨터 프로그래밍
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312017)"
+                           class="list-group-item toc-item "
+                           data-id="312017"
+                           data-parent-id="311880"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="06-1 개요">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    06-1 개요
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312020)"
+                           class="list-group-item toc-item "
+                           data-id="312020"
+                           data-parent-id="311880"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="06-2 기계어">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    06-2 기계어
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312015)"
+                           class="list-group-item toc-item "
+                           data-id="312015"
+                           data-parent-id="311880"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="06-3 어셈블리 언어">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    06-3 어셈블리 언어
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312016)"
+                           class="list-group-item toc-item "
+                           data-id="312016"
+                           data-parent-id="311880"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="06-4 어셈블러">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    06-4 어셈블러
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312022)"
+                           class="list-group-item toc-item "
+                           data-id="312022"
+                           data-parent-id="311880"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="06-5 프로그램 루프">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    06-5 프로그램 루프
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312018)"
+                           class="list-group-item toc-item "
+                           data-id="312018"
+                           data-parent-id="311880"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="06-6 산술 및 논리 연산의 프로그래밍">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    06-6 산술 및 논리 연산의 프로그래밍
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312019)"
+                           class="list-group-item toc-item "
+                           data-id="312019"
+                           data-parent-id="311880"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="06-7 서브루틴">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    06-7 서브루틴
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312021)"
+                           class="list-group-item toc-item "
+                           data-id="312021"
+                           data-parent-id="311880"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="06-8 입출력 프로그래밍">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    06-8 입출력 프로그래밍
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(311876)"
+                           class="list-group-item toc-item "
+                           data-id="311876"
+                           data-parent-id=""
+                           data-depth="0">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="07 마이크로 프로그램된 제어">
+                                <span style="padding-left:0px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    07 마이크로 프로그램된 제어
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312094)"
+                           class="list-group-item toc-item "
+                           data-id="312094"
+                           data-parent-id="311876"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="07-1 제어 메모리">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    07-1 제어 메모리
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312095)"
+                           class="list-group-item toc-item "
+                           data-id="312095"
+                           data-parent-id="311876"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="07-2 주소 시퀀싱">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    07-2 주소 시퀀싱
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312097)"
+                           class="list-group-item toc-item "
+                           data-id="312097"
+                           data-parent-id="311876"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="07-3 마이크로 프로그램의 예">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    07-3 마이크로 프로그램의 예
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312098)"
+                           class="list-group-item toc-item "
+                           data-id="312098"
+                           data-parent-id="311876"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="07-4 제어 장치의 설계">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    07-4 제어 장치의 설계
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(311875)"
+                           class="list-group-item toc-item "
+                           data-id="311875"
+                           data-parent-id=""
+                           data-depth="0">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="08 중앙 처리 장치">
+                                <span style="padding-left:0px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    08 중앙 처리 장치
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312109)"
+                           class="list-group-item toc-item "
+                           data-id="312109"
+                           data-parent-id="311875"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="08-1 개요">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    08-1 개요
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312108)"
+                           class="list-group-item toc-item "
+                           data-id="312108"
+                           data-parent-id="311875"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="08-2 범용 레지스터 구조">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    08-2 범용 레지스터 구조
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312106)"
+                           class="list-group-item toc-item "
+                           data-id="312106"
+                           data-parent-id="311875"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="08-3 스택 구조">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    08-3 스택 구조
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312112)"
+                           class="list-group-item toc-item "
+                           data-id="312112"
+                           data-parent-id="311875"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="08-4 명령어 형식">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    08-4 명령어 형식
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312105)"
+                           class="list-group-item toc-item "
+                           data-id="312105"
+                           data-parent-id="311875"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="08-5 어드레싱 모드">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    08-5 어드레싱 모드
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312107)"
+                           class="list-group-item toc-item "
+                           data-id="312107"
+                           data-parent-id="311875"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="08-6 데이터 전송과 처리">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    08-6 데이터 전송과 처리
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312111)"
+                           class="list-group-item toc-item "
+                           data-id="312111"
+                           data-parent-id="311875"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="08-7 프로그램 제어">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    08-7 프로그램 제어
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312110)"
+                           class="list-group-item toc-item "
+                           data-id="312110"
+                           data-parent-id="311875"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="08-8 간소화된 명령어 집합 컴퓨터">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    08-8 간소화된 명령어 집합 컴퓨터
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312103)"
+                           class="list-group-item toc-item "
+                           data-id="312103"
+                           data-parent-id=""
+                           data-depth="0">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="09 파이프라인과 벡터 처리">
+                                <span style="padding-left:0px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    09 파이프라인과 벡터 처리
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312117)"
+                           class="list-group-item toc-item "
+                           data-id="312117"
+                           data-parent-id="312103"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="09-1 병렬 처리">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    09-1 병렬 처리
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312119)"
+                           class="list-group-item toc-item "
+                           data-id="312119"
+                           data-parent-id="312103"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="09-2 파이프라인">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    09-2 파이프라인
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312118)"
+                           class="list-group-item toc-item "
+                           data-id="312118"
+                           data-parent-id="312103"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="09-3 산술 파이프라인">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    09-3 산술 파이프라인
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312120)"
+                           class="list-group-item toc-item "
+                           data-id="312120"
+                           data-parent-id="312103"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="09-4 명령어 파이프라인">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    09-4 명령어 파이프라인
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312116)"
+                           class="list-group-item toc-item "
+                           data-id="312116"
+                           data-parent-id="312103"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="09-5 RISC 파이프라인">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    09-5 RISC 파이프라인
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312114)"
+                           class="list-group-item toc-item "
+                           data-id="312114"
+                           data-parent-id="312103"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="09-6 벡터 처리">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    09-6 벡터 처리
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312115)"
+                           class="list-group-item toc-item "
+                           data-id="312115"
+                           data-parent-id="312103"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="09-7 배열 프로세서">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    09-7 배열 프로세서
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312102)"
+                           class="list-group-item toc-item "
+                           data-id="312102"
+                           data-parent-id=""
+                           data-depth="0">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="10 컴퓨터 산술 연산">
+                                <span style="padding-left:0px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    10 컴퓨터 산술 연산
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312124)"
+                           class="list-group-item toc-item "
+                           data-id="312124"
+                           data-parent-id="312102"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="10-1 개요">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    10-1 개요
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312128)"
+                           class="list-group-item toc-item "
+                           data-id="312128"
+                           data-parent-id="312102"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="10-2 덧셈과 뺄셈">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    10-2 덧셈과 뺄셈
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312127)"
+                           class="list-group-item toc-item "
+                           data-id="312127"
+                           data-parent-id="312102"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="10-3 곱셈 알고리즘">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    10-3 곱셈 알고리즘
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312126)"
+                           class="list-group-item toc-item "
+                           data-id="312126"
+                           data-parent-id="312102"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="10-4 나눗셈 알고리즘">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    10-4 나눗셈 알고리즘
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312122)"
+                           class="list-group-item toc-item "
+                           data-id="312122"
+                           data-parent-id="312102"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="10-5 부동 소수점 산술 연산">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    10-5 부동 소수점 산술 연산
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312123)"
+                           class="list-group-item toc-item "
+                           data-id="312123"
+                           data-parent-id="312102"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="10-6 십진 산술 장치">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    10-6 십진 산술 장치
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312121)"
+                           class="list-group-item toc-item "
+                           data-id="312121"
+                           data-parent-id="312102"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="10-7 십진 산술 연산">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    10-7 십진 산술 연산
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312101)"
+                           class="list-group-item toc-item "
+                           data-id="312101"
+                           data-parent-id=""
+                           data-depth="0">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="11 입출력 구조">
+                                <span style="padding-left:0px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    11 입출력 구조
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312134)"
+                           class="list-group-item toc-item "
+                           data-id="312134"
+                           data-parent-id="312101"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="11-1 주변 장치">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    11-1 주변 장치
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312136)"
+                           class="list-group-item toc-item "
+                           data-id="312136"
+                           data-parent-id="312101"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="11-2 입출력 인터페이스">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    11-2 입출력 인터페이스
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312133)"
+                           class="list-group-item toc-item "
+                           data-id="312133"
+                           data-parent-id="312101"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="11-3 비동기 데이터 전송">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    11-3 비동기 데이터 전송
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312129)"
+                           class="list-group-item toc-item "
+                           data-id="312129"
+                           data-parent-id="312101"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="11-4 전송 모드">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    11-4 전송 모드
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312135)"
+                           class="list-group-item toc-item "
+                           data-id="312135"
+                           data-parent-id="312101"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="11-5 우선순위 인터럽트">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    11-5 우선순위 인터럽트
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312131)"
+                           class="list-group-item toc-item "
+                           data-id="312131"
+                           data-parent-id="312101"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="11-6 직접 메모리 접근">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    11-6 직접 메모리 접근
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312130)"
+                           class="list-group-item toc-item "
+                           data-id="312130"
+                           data-parent-id="312101"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="11-7 입출력 프로세서">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    11-7 입출력 프로세서
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312132)"
+                           class="list-group-item toc-item "
+                           data-id="312132"
+                           data-parent-id="312101"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="11-8 직렬 통신">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    11-8 직렬 통신
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312100)"
+                           class="list-group-item toc-item "
+                           data-id="312100"
+                           data-parent-id=""
+                           data-depth="0">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="12 메모리 구조">
+                                <span style="padding-left:0px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    12 메모리 구조
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312146)"
+                           class="list-group-item toc-item "
+                           data-id="312146"
+                           data-parent-id="312100"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="12-1 메모리 계층">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    12-1 메모리 계층
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312145)"
+                           class="list-group-item toc-item "
+                           data-id="312145"
+                           data-parent-id="312100"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="12-2 주기억 장치">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    12-2 주기억 장치
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312144)"
+                           class="list-group-item toc-item "
+                           data-id="312144"
+                           data-parent-id="312100"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="12-3 보조 기억 장치">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    12-3 보조 기억 장치
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312140)"
+                           class="list-group-item toc-item "
+                           data-id="312140"
+                           data-parent-id="312100"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="12-4 어소시어티브 메모리">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    12-4 어소시어티브 메모리
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312141)"
+                           class="list-group-item toc-item "
+                           data-id="312141"
+                           data-parent-id="312100"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="12-5 캐시 메모리">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    12-5 캐시 메모리
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312143)"
+                           class="list-group-item toc-item "
+                           data-id="312143"
+                           data-parent-id="312100"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="12-6 가상 메모리">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    12-6 가상 메모리
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312142)"
+                           class="list-group-item toc-item "
+                           data-id="312142"
+                           data-parent-id="312100"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="12-7 메모리 관리 하드웨어">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    12-7 메모리 관리 하드웨어
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312099)"
+                           class="list-group-item toc-item "
+                           data-id="312099"
+                           data-parent-id=""
+                           data-depth="0">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="13 멀티프로세서">
+                                <span style="padding-left:0px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    13 멀티프로세서
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312149)"
+                           class="list-group-item toc-item "
+                           data-id="312149"
+                           data-parent-id="312099"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="13-1 멀티프로세서의 특성">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    13-1 멀티프로세서의 특성
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312147)"
+                           class="list-group-item toc-item "
+                           data-id="312147"
+                           data-parent-id="312099"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="13-2 상호연결 구조">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    13-2 상호연결 구조
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312148)"
+                           class="list-group-item toc-item "
+                           data-id="312148"
+                           data-parent-id="312099"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="13-3 프로세서 간의 중재">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    13-3 프로세서 간의 중재
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312150)"
+                           class="list-group-item toc-item "
+                           data-id="312150"
+                           data-parent-id="312099"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="13-4 프로세서 간 통신과 동기화">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    13-4 프로세서 간 통신과 동기화
+                                </span>
+                            </span>
+                        </a>
+                    
+                        <a href="javascript:page(312151)"
+                           class="list-group-item toc-item "
+                           data-id="312151"
+                           data-parent-id="312099"
+                           data-depth="1">
+                            <span style="white-space:nowrap;
+                                         overflow:hidden;
+                                         display:block"
+                                  title="13-5 캐시의 일관성">
+                                <span style="padding-left:20px">
+                                    <span class="toc-toggle"></span>
+                                    
+                                    13-5 캐시의 일관성
+                                </span>
+                            </span>
+                        </a>
+                    
+                </div>
+            </div>
+        </div>
+        <input type="hidden" name="request_mobile" id="request_mobile" value="0" />
+    </div>
+</div>
+</div>
+        <div class="page col-sm-offset-3 col-sm-9"
+             id="load_content"
+             style="margin-top:0px">
+            
+            
+
+
+
+
+
+
+
+
+<div class="btn-group pull-right menu-group" role="group">
+    <button class="btn btn-xs btn-default menu_link menu-toggle">
+        <i class="glyphicon glyphicon-menu-hamburger" title="사이드바 토글"></i>
+    </button>
+</div>
+<div class="menu-wikidocs"></div>
+
+
+
+<div class="clearfix page-depth">
+    <ol class="breadcrumb pull-left">
+        <li>
+            <small><a href="/book/18622"><i class="glyphicon glyphicon-book"></i> <strong>컴퓨터구조</strong></a></small>
+        </li>
+        
+            <li>
+                <small><a href="/311874">02 디지털 부속품</a></small>
+            </li>
+        
+            <li>
+                <small><a href="/311884">02-4 레지스터</a></small>
+            </li>
+        
+    </ol>
+    
+        <ol class="breadcrumb pull-right">
+            
+
+            
+
+            <li>
+                <a href="/"><small class="logo"><i class="glyphicon glyphicon-home"></i> 위키독스</small></a>
+            </li>
+        </ol>
+    
+</div>
+
+<div class="page-header-wrapper">
+    <h1 class="page-subject">
+        <span class="page-subject-text">02-4 레지스터</span>
+        <span class="page-subject-actions">
+            
+                <a href="#top"
+                   class="btn btn-default btn-sm page-back-to-top"
+                   style="display: none"
+                   title="맨위로"><i class="glyphicon glyphicon-arrow-up"></i></a>
+            
+            <a href="javascript:togglePageToc();"
+               class="btn btn-default btn-sm"
+               title="목차 보기"><i class="glyphicon glyphicon-list"></i></a>
+            
+                
+            
+        </span>
+    </h1>
+    <!-- 스크롤 진행 표시기 -->
+    <div class="scroll-progress-container" id="scrollProgressContainer">
+        <div class="scroll-progress-bar" id="scrollProgressBar"></div>
+    </div>
+    <div id="page-toc-container"
+         class="page-toc-container"
+         style="display: none">
+        <div class="page-toc-content"></div>
+    </div>
+</div>
+<!-- google adsense -->
+
+    <!-- PC -->
+
+    
+        
+    
+
+<!-- Mobile -->
+
+
+
+<!-- google adsense -->
+<div class="page-content tex2jax_process">
+    
+    
+        
+        <h2 id="_1">📝 레지스터</h2>
+<h3 id="1-register">1. 레지스터 (Register) 개요</h3>
+<p><strong>레지스터</strong>는 중앙 처리 장치(CPU) 내에서 데이터를 <strong>일시적으로 저장</strong>하는 데 사용되는 <strong>순차 회로</strong>이다. 레지스터는 1비트 정보를 저장하는 <strong>플립플롭(Flip-Flop)</strong>의 배열로 구성된다.</p>
+<ul>
+<li><strong>구성:</strong> $n$비트 레지스터는 $n$개의 플립플롭과 제어 논리로 구성된다.</li>
+</ul>
+<hr/>
+<h3 id="2-4">2. 4비트 레지스터</h3>
+<p><strong>4비트 레지스터</strong>는 4개의 D 플립플롭으로 구성되어 4비트의 이진 정보를 저장한다. 모든 플립플롭은 공통의 <strong>클록</strong> 펄스에 의해 동기적으로 동작한다.</p>
+<ul>
+<li><strong>입력/출력:</strong> 4개의 데이터 입력($I_0 \sim I_3$)과 4개의 데이터 출력($A_0 \sim A_3$)을 가진다.</li>
+</ul>
+<h4 id="4">4비트 레지스터의 구조</h4>
+<hr/>
+<h3 id="3-4">3. 병렬 로드를 가진 4비트 레지스터</h3>
+<p>실제 레지스터는 데이터를 저장하거나(Load), 현재 상태를 유지하는(Hold) <strong>제어 기능</strong>을 포함한다. <strong>병렬 로드를 가진 4비트 레지스터</strong>는 이 제어 기능을 추가한 형태이다.</p>
+<h4 id="31-mux">3.1. 제어 논리 추가 (MUX 활용)</h4>
+<p>각 플립플롭의 입력($D$) 단자 앞에 <strong>2x1 멀티플렉서(MUX)</strong>를 추가하여 <strong>로드(Load) 제어 신호</strong>에 따라 입력 데이터를 선택한다.</p>
+<ul>
+<li><strong>로드 신호:</strong> MUX의 선택 입력으로 사용된다.</li>
+</ul>
+<h4 id="32">3.2. 동작 함수표</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">로드 (Load) 신호</th>
+<th style="text-align: center;">MUX 선택</th>
+<th style="text-align: center;">플립플롭 다음 상태 $Q_{n+1}$</th>
+<th style="text-align: left;">동작</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>0</strong></td>
+<td style="text-align: center;">$Q$ 선택</td>
+<td style="text-align: center;">$Q$</td>
+<td style="text-align: left;"><strong>유지 (Hold):</strong> 레지스터 값 변화 없음</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>1</strong></td>
+<td style="text-align: center;">$I$ 선택</td>
+<td style="text-align: center;">$I$</td>
+<td style="text-align: left;"><strong>로드 (Load):</strong> 새로운 입력 $I$를 저장</td>
+</tr>
+</tbody>
+</table>
+<h4 id="33">3.3. 병렬 로드 레지스터의 구조</h4>
+<p>로드 신호가 1일 때만 새로운 데이터($I$)가 레지스터에 저장되고, 0일 때는 현재 값($Q$)이 다시 플립플롭의 입력으로 되먹임되어 값이 유지된다.</p>
+    
+</div>
+<div class="muted text-right" style="font-size: 0.9em;margin:10px 0;">
+    
+        마지막 편집일시 : 2025년 12월 4일 1:50 오전
+    
+</div>
+
+<!-- google adsense -->
+
+    <!-- PC -->
+
+    
+
+<!-- Mobile -->
+
+
+
+<!-- google adsense -->
+<div class="clearfix">
+    <a href="javascript:show_comments();" class="label label-info">댓글 0</a>
+    <a href="#myModal"
+       data-toggle="modal"
+       title="피드백을 남겨주세요"
+       class="label label-info">피드백</a>
+</div>
+<div class="user_comments" style="display:none">
+    <div class="comments" id="page_all_comments">
+
+    
+
+</div>
+    
+        <a href="/loginForm" class="text-info" style="font-size:12px">※ 댓글 작성은 로그인이 필요합니다.</a>
+        <a href="#myModal" data-toggle="modal" style="font-size:12px">(또는 피드백을 이용해 주세요.)</a>
+    
+</div>
+<div class="page-prev-next">
+<div class="clearfix">
+    <div class="pull-left">
+        <ul>
+            
+                <li>
+                    <strong>이전글</strong> : <a class="prev_page_link" href="javascript:page(311882)">02-3 멀티플렉서</a>
+                </li>
+            
+            
+                <li>
+                    <strong>다음글</strong> : <a class="next_page_link" href="javascript:page(311898)">02-5 시프트 레지스터</a>
+                </li>
+            
+        </ul>
+    </div>
+</div>
+</div>
+
+
+
+    
+    <a href="/"
+       class="label label-default wikidocs-home"
+       data-toggle="popover"
+       data-placement="left"
+       data-content="위키독스 홈">
+        <span class="glyphicon glyphicon-home"></span>
+    </a>
+    <a class="label label-default dark_btn toggle-theme"
+       data-toggle="popover"
+       data-placement="left"
+       data-content="다크모드">
+        <span class="glyphicon glyphicon-adjust"></span>
+    </a>
+    <a href="#top"
+       class="label label-default back-to-top"
+       data-toggle="popover"
+       data-placement="left"
+       data-content="맨위로">
+        <span class="glyphicon glyphicon-arrow-up"></span>
+    </a>
+
+<!-- 책갈피 모달 -->
+<div class="modal fade"
+     id="bookmarkModal"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="bookmarkModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="bookmarkModalLabel">책갈피</h4>
+            </div>
+            <div class="modal-body bookmark-body">
+                <!-- 여기에 동적 데이터가 로드됩니다 -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">추가</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+    </div>
+    <div style="display:none" class="prev_next_indicator">
+    <a class="prev_icon" href="javascript:page(311882)" role="button">
+        <span class="glyphicon glyphicon-chevron-left" style="font-size:2em;"></span>
+    </a>
+
+
+    <a class="next_icon" href="javascript:page(311898)" role="button">
+        <span class="glyphicon glyphicon-chevron-right" style="font-size:2em;"></span>
+    </a>
+
+</div>
+    
+<!-- Modal -->
+<div id="myModal"
+     class="modal fade"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3 id="myModalLabel" class="modal-title">이 페이지에 대한 피드백을 남겨주세요</h3>
+            </div>
+            <div class="modal-body">
+                <form class="form" role="form">
+                    <input type="hidden" name="page_id" id="page_id" value="311884" />
+                    <div class="form-group">
+                        <label class="control-label" for="email">답장받을 이메일 주소</label>
+                        <div class="">
+                            <input class="form-control"
+                                   type="text"
+                                   id="email"
+                                   placeholder="Email"
+                                   >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="feedback">하고 싶은 말</label>
+                        <div class="controls">
+                            <textarea class="form-control" id="feedback" rows="5"></textarea>
+                        </div>
+                    </div>
+                    <p style="font-size:12px;">※ 피드백은 저자에게 e-메일로 전달됩니다.</p>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal">Close</button>
+                <button class="btn btn-primary" id="feedback_btn">전송하기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+<!-- Modal -->
+<div id="reportModal"
+     class="modal fade"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="reportModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3 id="reportModalLabel" class="modal-title">댓글을 신고합니다.</h3>
+            </div>
+            <div class="modal-body">
+                <form class="form" role="form">
+                    <input type="hidden" name="comment_id" id="comment_id" />
+                    해당 댓글을 신고하시겠습니까? 댓글 신고는 다음과 같은 경우에 사용해주세요:
+                    <ol>
+                        <li>스팸 또는 광고성 내용이 포함된 경우</li>
+                        <li>욕설, 비방, 개인정보 유출 등 부적절한 내용이 포함된 경우</li>
+                        <li>저작권을 침해하는 내용이 포함된 경우</li>
+                    </ol>
+                    <div class="form-group">
+                        <label class="control-label" for="report">신고 사유를 입력해 주세요.</label>
+                        <div class="controls">
+                            <textarea class="form-control" id="report" rows="5"></textarea>
+                        </div>
+                    </div>
+                    <p style="font-size:12px;">
+                        ※ 신고하신 내용은 관리자에게 전달되며, 확인 후 적절한 조치가 이루어집니다. 신고는 익명으로 처리되며, 신고자의 정보는 공개되지 않습니다.
+                    </p>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal">Close</button>
+                <button class="btn btn-primary" id="report_btn">전송하기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+        
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+                crossorigin="anonymous"></script>
+        <script>
+        const staticFiles = {
+            mainLight: "https://static.wikidocs.net/static/book/css/style_stack.min.css",
+            mainDark: "https://static.wikidocs.net/static/book/css/style_stack_dark.min.css",
+            markdownLight: "https://static.wikidocs.net/static/book/css/markdown_stack.min.css",
+            markdownDark: "https://static.wikidocs.net/static/book/css/markdown_stack_dark.min.css",
+            highlightLight: "//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css",
+            highlightDark: "//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/atom-one-dark.min.css"
+        };
+        </script>
+        <script type="text/javascript"
+                src="https://static.wikidocs.net/static/book/js/common.min.js?v=1017"></script>
+        <script type="text/javascript" src="https://static.wikidocs.net/static/book/js/utils.min.js"></script>
+        <script type="text/javascript"
+                src="https://static.wikidocs.net/static/book/js/base.min.js?v=1017"></script>
+        
+    
+
+<link type="text/css"
+      href="https://static.wikidocs.net/static/apprise/apprise.min.css"
+      rel="stylesheet" />
+<link type="text/css"
+      href="https://static.wikidocs.net/static/treeview/bootstrap-treeview.min.css"
+      rel="stylesheet" />
+
+    <link type="text/css"
+          id="markdown-stylesheet"
+          href="https://static.wikidocs.net/static/book/css/markdown_stack.min.css?v=1017"
+          rel="stylesheet" />
+    <link rel="stylesheet"
+          id="highlight-stylesheet"
+          href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+
+<link type="text/css"
+      href="https://static.wikidocs.net/static/book/css/copycode.min.css"
+      rel="stylesheet" />
+<script type="text/javascript"
+        src="https://static.wikidocs.net/static/apprise/apprise-1.5.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script id="MathJax-script"
+        async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="https://static.wikidocs.net/static/book/js/page_static.min.js"></script>
+
+    
+
+        
+    <script src="https://static.wikidocs.net/static/book/js/toc.min.js?v=1017"></script>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+        const isDark = document.body.dataset.isDarkmode === 'true';
+        mermaid.initialize({ startOnLoad: false, theme: isDark ? 'dark' : 'default' });
+        document.querySelectorAll('pre code.language-mermaid').forEach((el) => {
+            const pre = el.parentElement;
+            const div = document.createElement('div');
+            div.className = 'mermaid';
+            div.textContent = el.textContent;
+            pre.replaceWith(div);
+        });
+        await mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
+    </script>
+    <script>
+        function hideUnfilledAds() {
+            document.querySelectorAll('ins.adsbygoogle[data-ad-status="unfilled"]').forEach((ad) => {
+                const adWrapper = ad.closest(".dynamic-ad, .ad-wrapper");
+                if (adWrapper) {
+                    adWrapper.style.display = "none";
+                    adWrapper.style.height = "0";
+                    adWrapper.style.minHeight = "0";
+                }
+
+                const slotWrapper = ad.closest(".first-ad, .second-ad");
+                if (slotWrapper) {
+                    slotWrapper.style.display = "none";
+                    slotWrapper.style.height = "0";
+                    slotWrapper.style.minHeight = "0";
+                }
+            });
+
+            document.querySelectorAll(".wikidocs-ad-block").forEach((block) => {
+                const ads = Array.from(block.querySelectorAll("ins.adsbygoogle"));
+                const filledAds = ads.filter((ad) => {
+                    const status = ad.getAttribute("data-ad-status");
+                    return status === "filled" || status === "unfill-optimized";
+                });
+                const pendingAds = ads.filter((ad) => {
+                    return !ad.getAttribute("data-ad-status");
+                });
+                if (ads.length > 0 && filledAds.length === 0 && pendingAds.length === 0) {
+                    block.style.display = "none";
+                }
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            hideUnfilledAds();
+            const observer = new MutationObserver(hideUnfilledAds);
+            document.querySelectorAll("ins.adsbygoogle").forEach((ad) => {
+                observer.observe(ad, {
+                    attributes: true,
+                    attributeFilter: ["data-ad-status"],
+                });
+            });
+        });
+    </script>
+    <script src="https://static.wikidocs.net/static/book/js/page.min.js?v=1017"></script>
+
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"63d42267f42e40ab89cc17432f52c5c2","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a0e88ee2eb6fe9f8',t:'MTc4MTkzNTI3OA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
