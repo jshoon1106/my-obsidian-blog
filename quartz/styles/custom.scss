@@ -1,10 +1,8 @@
 @use "./variables.scss" as *;
 
-// Pretendard 웹폰트 로드 (한글 가독성 최적화)
-@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
-
+// 전역 폰트: 나눔고딕 (Nanum Gothic)
 body, button, input, textarea, h1, h2, h3, h4, h5, h6 {
-  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif !important;
+  font-family: "Nanum Gothic", -apple-system, BlinkMacSystemFont, "Malgun Gothic", "Apple SD Gothic Neo", sans-serif !important;
 }
 
 // 1. 본문 제목(Article Title) 강조 및 위/아래 여백 추가
@@ -14,11 +12,11 @@ h1.article-title,
   font-weight: 800 !important;
   line-height: 1.35 !important;
   letter-spacing: -0.025em !important;
-  margin-top: 1.5rem !important;
+  margin-top: 1.75rem !important;
   margin-bottom: 0.5rem !important;
 }
 
-// 2. 날짜 / 시간 메타데이터 오른쪽 정렬
+// 2. 날짜 / 시간 메타데이터: 오른쪽 정렬
 .content-meta,
 p.content-meta {
   text-align: right !important;
@@ -34,7 +32,7 @@ p.content-meta {
 // 3. 좌측 사이트 로고 / 타이틀 스타일링
 .page-title {
   font-size: 1.6rem !important;
-  font-weight: 700 !important;
+  font-weight: 800 !important;
   margin-top: 0.5rem !important;
   margin-bottom: 1rem !important;
 }
@@ -45,7 +43,7 @@ button#explorer,
 .folder-outer button,
 .explorer-outer button,
 .folder-button {
-  line-height: 1.5 !important;
+  line-height: 1.6 !important;
   padding-top: 2px !important;
   padding-bottom: 2px !important;
   overflow: visible !important;
