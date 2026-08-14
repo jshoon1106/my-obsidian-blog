@@ -7,7 +7,39 @@ body, button, input, textarea, h1, h2, h3, h4, h5, h6 {
   font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif !important;
 }
 
-// 탐색기(Explorer) 및 사이드바 한글 받침 잘림 방지
+// 1. 본문 제목(Article Title) 강조 및 위/아래 여백 추가
+h1.article-title,
+.article-title {
+  font-size: 2.35rem !important;
+  font-weight: 800 !important;
+  line-height: 1.35 !important;
+  letter-spacing: -0.025em !important;
+  margin-top: 1.5rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+// 2. 날짜 / 시간 메타데이터 오른쪽 정렬
+.content-meta,
+p.content-meta {
+  text-align: right !important;
+  display: block !important;
+  font-size: 0.875rem !important;
+  color: var(--gray) !important;
+  margin-top: 0.25rem !important;
+  margin-bottom: 2rem !important;
+  padding-bottom: 0.75rem !important;
+  border-bottom: 1px solid var(--lightgray);
+}
+
+// 3. 좌측 사이트 로고 / 타이틀 스타일링
+.page-title {
+  font-size: 1.6rem !important;
+  font-weight: 700 !important;
+  margin-top: 0.5rem !important;
+  margin-bottom: 1rem !important;
+}
+
+// 4. 탐색기(Explorer) 및 사이드바 한글 받침 잘림 방지
 .explorer-title,
 button#explorer,
 .folder-outer button,
@@ -21,7 +53,7 @@ button#explorer,
   align-items: center !important;
 }
 
-// 검색창 및 아이콘 정렬
+// 5. 검색창 및 아이콘 정렬
 .search-button,
 #search-button {
   line-height: 1.4 !important;
