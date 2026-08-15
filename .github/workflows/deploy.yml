@@ -41,10 +41,14 @@ jobs:
         env:
           GDRIVE_CREDENTIALS: ${{ secrets.GDRIVE_CREDENTIALS }}
           GDRIVE_FOLDER_ID: ${{ secrets.GDRIVE_FOLDER_ID }}
-        if: ${{ secrets.GDRIVE_CREDENTIALS != '' && secrets.GDRIVE_FOLDER_ID != '' }}
         run: |
-          pip install google-api-python-client google-auth
-          python .github/scripts/sync_gdrive.py
+          if [ -n "$GDRIVE_CREDENTIALS" ] && [ -n "$GDRIVE_FOLDER_ID" ]; then
+            echo "Google Drive credentials found. Syncing..."
+            pip install google-api-python-client google-auth
+            python .github/scripts/sync_gdrive.py
+          else
+            echo "Google Drive credentials not configured. Skipping sync."
+          fi
 
       - name: Setup Node
         uses: actions/setup-node@v4
