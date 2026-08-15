@@ -233,6 +233,15 @@ def main():
     service = get_drive_service()
     sync_folder(service, folder_id, CONTENT_DIR, manifest)
     clean_deleted_files(manifest)
+
+    # Convert Obsidian Dataview blocks into static GFM markdown tables/lists
+    try:
+        from dataview_converter import convert_dataview_queries_in_vault
+        print("\n>> Evaluating Dataview queries...")
+        convert_dataview_queries_in_vault(CONTENT_DIR)
+    except Exception as e:
+        print(f"[WARN] Dataview conversion warning: {e}")
+
     save_manifest(manifest)
 
     print(
