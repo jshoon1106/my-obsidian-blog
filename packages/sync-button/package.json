@@ -1,0 +1,29 @@
+{
+  "name": "@quartz-community/sync-button",
+  "version": "1.0.0",
+  "description": "Google Drive Sync button component for Quartz",
+  "type": "module",
+  "main": "./dist/index.js",
+  "exports": {
+    ".": "./dist/index.js",
+    "./components": "./dist/index.js",
+    "./package.json": "./package.json"
+  },
+  "quartz": {
+    "name": "sync-button",
+    "displayName": "Sync Button",
+    "category": "component",
+    "version": "1.0.0",
+    "quartzVersion": ">=5.0.0",
+    "defaultOrder": 50,
+    "defaultEnabled": true,
+    "defaultOptions": {},
+    "components": {
+      "SyncButton": {
+        "displayName": "Sync Button",
+        "defaultPosition": "left",
+        "defaultPriority": 36
+      }
+    }
+  }
+}
