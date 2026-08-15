@@ -56,3 +56,82 @@ button#explorer,
 #search-button {
   line-height: 1.4 !important;
 }
+
+// 6. 구글 드라이브 동기화 트리거 버튼
+.sync-trigger-btn {
+  cursor: pointer;
+  padding: 0;
+  position: relative;
+  background: none;
+  border: none;
+  width: 20px;
+  height: 32px;
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--darkgray);
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.sync-trigger-btn:hover {
+  color: var(--secondary);
+  transform: scale(1.1);
+}
+
+.sync-trigger-btn svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.sync-trigger-btn.syncing svg {
+  animation: sync-spin 1s linear infinite;
+}
+
+@keyframes sync-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// 동기화 토스트 알림
+.sync-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--light);
+  color: var(--dark);
+  border: 1px solid var(--lightgray);
+  border-radius: 8px;
+  padding: 12px 18px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  font-size: 0.9rem;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: toast-in 0.25s ease-out;
+  max-width: 360px;
+}
+
+.sync-toast.error {
+  border-color: #ef4444;
+  color: #b91c1c;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+

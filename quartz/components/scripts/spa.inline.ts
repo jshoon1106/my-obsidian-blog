@@ -219,3 +219,82 @@ if (!customElements.get("route-announcer")) {
     },
   )
 }
+
+function initSyncButton() {
+  if (document.querySelector(".sync-trigger-btn")) return
+
+  const toolbar = document.querySelector(".toolbar") || document.querySelector("header")
+  if (!toolbar) return
+
+  const btn = document.createElement("button")
+  btn.className = "sync-trigger-btn"
+  btn.setAttribute("aria-label", "구글 드라이브 동기화 (Google Drive Sync)")
+  btn.setAttribute("title", "구글 드라이브 동기화 (Google Drive Sync - Shift+클릭시 토큰 재설정)")
+  btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3L21.5 8M22 12.5a10 10 0 0 1-18.8 4.2L2.5 16"/>
+  </svg>`
+
+  const showToast = (message: string, isError = false) => {
+    document.querySelectorAll(".sync-toast").forEach((el) => el.remove())
+    const toast = document.createElement("div")
+    toast.className = `sync-toast ${isError ? "error" : ""}`
+    toast.textContent = message
+    document.body.appendChild(toast)
+    setTimeout(() => toast.remove(), 4500)
+  }
+
+  btn.addEventListener("click", async (e) => {
+    if (e.shiftKey) {
+      if (confirm("저장된 GitHub Personal Access Token (PAT)을 재설정하시겠습니까?")) {
+        localStorage.removeItem("QUARTZ_GITHUB_PAT")
+        showToast("저장된 토큰이 삭제되었습니다.")
+      }
+      return
+    }
+
+    let token = localStorage.getItem("QUARTZ_GITHUB_PAT")
+    if (!token) {
+      token = prompt(
+        "동기화(배포) 실행에 필요한 GitHub Personal Access Token (PAT)을 입력해주세요:\n(현재 브라우저에만 안전하게 저장됩니다)"
+      )
+      if (!token) return
+      token = token.trim()
+      localStorage.setItem("QUARTZ_GITHUB_PAT", token)
+    }
+
+    btn.classList.add("syncing")
+    showToast("🔄 Google Drive 동기화 및 빌드 요청 중...")
+
+    try {
+      const res = await fetch("https://api.github.com/repos/jshoon1106/my-obsidian-blog/dispatches", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: "application/vnd.github+json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ event_type: "sync-blog" }),
+      })
+
+      btn.classList.remove("syncing")
+      if (res.status === 204 || res.ok) {
+        showToast("✅ 동기화 요청 완료! 약 1분 후 페이지를 새로고침하세요.")
+      } else {
+        const errData = (await res.json().catch(() => ({}))) as { message?: string }
+        showToast(
+          `❌ 동기화 실패 (${res.status}): ${errData.message || "토큰 권한 확인 필요 (Shift+클릭으로 토큰 재설정)"}`,
+          true
+        )
+      }
+    } catch (err) {
+      btn.classList.remove("syncing")
+      showToast(`❌ 네트워크 오류: ${err instanceof Error ? err.message : String(err)}`, true)
+    }
+  })
+
+  toolbar.appendChild(btn)
+}
+
+document.addEventListener("nav", initSyncButton)
+document.addEventListener("DOMContentLoaded", initSyncButton)
+

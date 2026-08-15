@@ -5,6 +5,10 @@ on:
     branches:
       - main
       - v5
+  schedule:
+    - cron: '0 15 * * *' # Every day at 00:00 KST (15:00 UTC)
+  repository_dispatch:
+    types: [sync-blog]
   workflow_dispatch:
 
 permissions:
@@ -27,18 +31,38 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Sync content from Google Drive
+        env:
+          GDRIVE_CREDENTIALS: ${{ secrets.GDRIVE_CREDENTIALS }}
+          GDRIVE_FOLDER_ID: ${{ secrets.GDRIVE_FOLDER_ID }}
+        if: ${{ secrets.GDRIVE_CREDENTIALS != '' && secrets.GDRIVE_FOLDER_ID != '' }}
+        run: |
+          pip install google-api-python-client google-auth
+          python .github/scripts/sync_gdrive.py
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 22
+
       - name: Install Dependencies
         run: npm install
+
       - name: Build Quartz
         run: npx quartz build
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: public
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
