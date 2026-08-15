@@ -216,6 +216,12 @@ plugins:
       position: left
       priority: 35
       group: toolbar
+  - source: "@quartz-community/sync-button"
+    enabled: true
+    layout:
+      position: left
+      priority: 36
+      group: toolbar
   - source: "@quartz-community/breadcrumbs"
     enabled: true
     layout:
