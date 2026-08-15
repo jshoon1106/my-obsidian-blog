@@ -223,8 +223,20 @@ if (!customElements.get("route-announcer")) {
 function initSyncButton() {
   if (document.querySelector(".sync-trigger-btn")) return
 
-  const toolbar = document.querySelector(".toolbar") || document.querySelector("header")
-  if (!toolbar) return
+  const darkmodeBtn = document.querySelector(".darkmode")
+  const readermodeBtn = document.querySelector(".readermode")
+  const flexContainer =
+    document.querySelector(".left .flex-component") ||
+    darkmodeBtn?.closest(".flex-component") ||
+    darkmodeBtn?.parentElement?.parentElement ||
+    document.querySelector(".toolbar") ||
+    document.querySelector("header")
+
+  if (!flexContainer) return
+
+  const wrapper = document.createElement("div")
+  wrapper.style.cssText =
+    "flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"
 
   const btn = document.createElement("button")
   btn.className = "sync-trigger-btn"
@@ -255,7 +267,7 @@ function initSyncButton() {
     let token = localStorage.getItem("QUARTZ_GITHUB_PAT")
     if (!token) {
       token = prompt(
-        "동기화(배포) 실행에 필요한 GitHub Personal Access Token (PAT)을 입력해주세요:\n(현재 브라우저에만 안전하게 저장됩니다)"
+        "동기화(배포) 실행에 필요한 GitHub Personal Access Token (PAT)을 입력해주세요:\n(현재 브라우저에만 안전하게 저장됩니다)",
       )
       if (!token) return
       token = token.trim()
@@ -283,7 +295,7 @@ function initSyncButton() {
         const errData = (await res.json().catch(() => ({}))) as { message?: string }
         showToast(
           `❌ 동기화 실패 (${res.status}): ${errData.message || "토큰 권한 확인 필요 (Shift+클릭으로 토큰 재설정)"}`,
-          true
+          true,
         )
       }
     } catch (err) {
@@ -292,9 +304,14 @@ function initSyncButton() {
     }
   })
 
-  toolbar.appendChild(btn)
+  wrapper.appendChild(btn)
+  flexContainer.appendChild(wrapper)
 }
 
 document.addEventListener("nav", initSyncButton)
 document.addEventListener("DOMContentLoaded", initSyncButton)
+if (document.readyState === "complete" || document.readyState === "interactive") {
+  initSyncButton()
+}
+
 
