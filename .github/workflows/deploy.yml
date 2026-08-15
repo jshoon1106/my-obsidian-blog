@@ -37,13 +37,23 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Sync content from Google Drive
+      - name: Restore Content Cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            content
+            .sync_manifest.json
+          key: gdrive-content-${{ github.run_id }}
+          restore-keys: |
+            gdrive-content-
+
+      - name: Sync content from Google Drive (Incremental)
         env:
           GDRIVE_CREDENTIALS: ${{ secrets.GDRIVE_CREDENTIALS }}
           GDRIVE_FOLDER_ID: ${{ secrets.GDRIVE_FOLDER_ID }}
         run: |
           if [ -n "$GDRIVE_CREDENTIALS" ] && [ -n "$GDRIVE_FOLDER_ID" ]; then
-            echo "Google Drive credentials found. Syncing..."
+            echo "Google Drive credentials found. Running Incremental Sync..."
             pip install google-api-python-client google-auth
             python .github/scripts/sync_gdrive.py
           else
